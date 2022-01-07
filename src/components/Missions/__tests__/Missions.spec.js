@@ -52,6 +52,34 @@ describe('Missions component', () => {
         await findByText('Thaicom');
         await findByText('Telstar');
         await findByText('Iridium NEXT');
+    });
 
+    it ('Should display links for the mission', async () => {
+        const localMocks = [
+            {
+                ...mocks[0],
+                result: {
+                    data: {
+                        missions: [
+                            {
+                                "id": "F4F83DE",
+                                "name": "Telstar",
+                                "links": ['https://www.telesat.com/']
+                            },
+                        ]
+                    }
+                }
+            }
+        ];
+
+        const { findByRole } = render(
+            <MockedProvider mocks={localMocks}>
+                <Missions/>
+            </MockedProvider>
+        );
+
+        await findByRole('link',{
+            name: /https:\/\/www\.telesat\.com\//i
+        })
     });
 })

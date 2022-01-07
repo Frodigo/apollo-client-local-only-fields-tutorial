@@ -8,6 +8,7 @@ export const GET_MISSIONS = gql`
             twitter
             website
             wikipedia
+            links @client
         }
     }  
 `;

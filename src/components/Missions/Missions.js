@@ -13,8 +13,15 @@ export const Missions = () => {
     const shouldDisplayMissions = useMemo(() => {
         if (data?.missions?.length) {
             return data.missions.map(mission => {
+                const shouldDisplayLinks = mission.links?.length ? mission.links.map(link => {
+                    return <li key={`${mission.id}-${link}`}>
+                        <a href={link}>{link}</a>
+                    </li>
+                }) : null;
+
                 return <div key={mission.id} className={classes.mission}>
                     <h2>{mission.name}</h2>
+                    {shouldDisplayLinks}
                 </div>
             })
         }
